@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <%- include('header') %>
+  <header class="cnt-header">
+    <h1>Contact Us</h1>
+    <p>We’re here to help and answer any questions you might have.</p>
+  </header>
+
+  <section class="cnt-container">
+    <div class="cnt-info">
+      <h2>Get in Touch</h2>
+      <p>We’d love to hear from you. Reach out using the form or contact us directly!</p>
+      <div class="cnt-details">
+        <!-- <p><span>Email:</span> support@example.com</p> -->
+        <p><span>Phone:</span> +91 9892735054</p>
+        <p><span>Address:</span> Noorani Mohalla near Noorani Masjid, Taloja, 410208</p>
+      </div>
+    </div>
+
+    <div class="cnt-form">
+      <form>
+        <label for="cnt-name">Your Name</label>
+        <input type="text" id="cnt-name" placeholder="Enter your name" required>
+
+        <label for="cnt-email">Your Email</label>
+        <input type="email" id="cnt-email" placeholder="Enter your email" required>
+
+        <label for="cnt-message">Your Message</label>
+        <textarea id="cnt-message" placeholder="Type your message..." required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="nc-footer">
+    Noorani Cricketers • All Rights Reserved.
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Event</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include('header') %>
+
+<div class="event-form-container">
+
+  <h2 class="event-form-heading">Add New Event</h2>
+
+  <form
+    method="POST"
+    action="/admin/add-event"
+    enctype="multipart/form-data"
+    class="event-form"
+  >
+
+    <!-- EVENT IMAGE -->
+
+    <div class="event-image-box">
+      <img
+        src="/images/default-event.png"
+        id="eventPreview"
+        class="event-preview-img"
+        alt="Event Image"
+      />
+    </div>
+
+    <input
+      type="file"
+      name="event_image"
+      id="eventImageInput"
+      class="event-file-input"
+      accept="image/*"
+      required
+    />
+
+    <!-- EVENT NAME -->
+    <label class="event-label">Name of the Event</label>
+    <input
+      type="text"
+      name="event_name"
+      class="event-input"
+      placeholder="Enter event name"
+      required
+    />
+
+    <!-- EVENT DATE -->
+    <label class="event-label">Event Date (Optional)</label>
+    <input
+      type="date"
+      name="event_date"
+      class="event-input"
+    />
+
+    <!-- DESCRIPTION -->
+    <label class="event-label">Description (Optional)</label>
+    <textarea
+      name="event_description"
+      class="event-textarea"
+      placeholder="Write event description"
+      rows="4"
+    ></textarea>
+
+    <!-- SUBMIT -->
+    <button type="submit" class="event-submit-btn">
+      Add Event
+    </button>
+
+  </form>
+</div>
+
+<script>
+  const input = document.getElementById("eventImageInput");
+  const preview = document.getElementById("eventPreview");
+
+  input.addEventListener("change", () => {
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => preview.src = reader.result;
+    reader.readAsDataURL(file);
+  });
+</script>
+
+</body>
+</html>

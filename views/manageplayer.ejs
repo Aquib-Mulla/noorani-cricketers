@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Players</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Header Include -->
+  <%- include('header') %>
+
+  <div class="mp-wrapper">
+
+    <!-- Page Header -->
+    <header class="mp-header">
+      <h2>Manage Players</h2>
+    </header>
+
+    <main class="mp-content">
+
+      <% if (!players || players.length === 0) { %>
+        <p style="text-align:center;">No players found</p>
+      <% } else { %>
+
+      <table class="mp-table">
+        <thead>
+          <tr>
+            <th>Player Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% players.forEach(player => { %>
+            <tr>
+              <td><%= player.name %></td>
+              <td><%= player.role %></td>
+              <td>
+
+                <!-- Edit Button -->
+                <a href="/admin/edit-player/<%= player.id %>" class="mp-btn-edit">
+                  Edit
+                </a>
+
+                <!-- Delete Button -->
+                <form action="/admin/delete-player/<%= player.id %>" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this player?');">
+                  <button type="submit" class="mp-btn-delete">🗑 Delete</button>
+                </form>
+
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <% } %>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

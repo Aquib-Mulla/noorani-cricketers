@@ -1,0 +1,127 @@
+NOORANI_CRICKET/
+│
+├── netlify.toml
+│
+├── public/                ← Frontend (HTML files)
+│   ├── index.html
+│   ├── about.html
+│   ├── contact.html
+│   ├── events.html
+│   ├── founder.html
+│   ├── jersey.html
+│   ├── links.html
+│   ├── players.html
+│   ├── playerdetail.html
+│   ├── 2024.html
+│   └── templates/         ← If you want extra reusable HTML
+│
+├── static/                ← Frontend assets
+│   ├── css/
+│   │   └── style.css
+│   │
+│   ├── js/
+│   │   └── script.js
+│   │
+│   └── img/
+│       └── (images here)
+│
+├── functions/             ← Backend (Netlify Serverless API)
+│   ├── db.js              ← Database connection (MongoDB / MySQL)
+│   ├── addPlayer.js
+│   ├── getPlayers.js
+│   ├── updatePlayer.js
+│   ├── deletePlayer.js
+│   ├── contactSubmit.js
+│   └── auth/
+│       ├── login.js
+│       └── register.js
+│
+├── package.json
+│
+└── README.md
+
+
+
+*****************************************************************************************************************************************
+_____________addPlayer page_________________
+make the only one page for admin where it can change all things 
+add user  
+├── Player Photo
+├── Player Name (Complete Name)
+├── Player Role (batter/bowler) 
+├── Player Detail
+├── Add Button
+└── 
+
+Upcomming Event
+└── add Event | Delete Event 
+
+Event
+└── add Event | Delete Event |make the Album 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOORANI_CRICKET/
+│
+├── src/                                # BACKEND (Node.js / Express)
+│   ├── config/
+│   │   └── db.js                       # Database connection file
+│   │
+│   ├── models/
+│   │   └── Player.js                   # Player model (DB queries / schema)
+│   │
+│   ├── controllers/
+│   │   └── playerController.js         # Logic for add/get players
+│   │
+│   ├── routes/
+│   │   └── playerRoutes.js             # All player APIs
+│   │
+│   └── server.js                       # Main backend server file
+│
+├── public/                             # FRONTEND STATIC FILES
+│   ├── css/
+│   │   └── style.css                   # Main website stylesheet
+│   │
+│   ├── js/
+│   │   └── script.js                   # Frontend JS (form submit, API calls)
+│   │
+│   └── img/                            # Website images (logos, players, etc.)
+│
+├── views/                              # UI HTML Pages
+│   ├── index.html
+│   ├── about.html
+│   ├── login.html
+│   ├── addplayer.html
+│   ├── players.html
+│   ├── playerdetail.html
+│   ├── founder.html
+│   ├── events.html
+│   ├── 2024.html
+│   ├── contact.html
+│   ├── links.html
+│   ├── jersey.html
+│   └── intro.html
+│
+├── .env                                # Environment variables (DB credentials)
+├── .gitignore                          # Ignore node_modules, .env
+│
+├── package.json                        # Node.js project file
+├── package-lock.json                   # Auto-generated dependency lock file
+│
+└── node_modules/                       # Installed dependencies

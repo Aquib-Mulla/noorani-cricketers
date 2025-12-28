@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Squad</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .category-filter { text-align:center; margin:20px 0; }
+    .filter-btn { background-color:#e45305; color:#fff; border:none; padding:8px 15px; margin:5px; border-radius:6px; cursor:pointer; transition:0.3s; }
+    .filter-btn:hover { background-color:#c74304; }
+    .filter-btn.active { background-color:#333; }
+
+    @media (max-width:414px) {
+      .category-filter { display:flex; overflow-x:auto; white-space:nowrap; margin:10px 0; padding:5px; }
+      .category-filter::-webkit-scrollbar { display:none; }
+      .filter-btn { flex:0 0 auto; padding:6px 14px; border-radius:25px; font-size:13px; }
+    }
+  </style>
+</head>
+<body>
+  <%- include('header') %>
+
+  <div class="playerbody">
+    <h1 class="p-title">Our Cricket Squad</h1>
+
+    <!-- Category Filter Buttons -->
+    <div class="category-filter">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="batter">Batters</button>
+      <button class="filter-btn" data-category="bowler">Bowlers</button>
+      <button class="filter-btn" data-category="all-rounder">All-Rounders</button>
+      <button class="filter-btn" data-category="wicket-keeper">Wicket Keepers</button>
+    </div>
+
+    <!-- Player Cards -->
+    <div class="p-container">
+      <% if (players.length === 0) { %>
+        <p style="text-align:center;">No players added yet</p>
+      <% } else { %>
+        <% players.forEach(player => { %>
+          <div class="p-card">
+            <img src="/uploads/<%= player.image %>" alt="Player Photo" class="p-photo"
+                onerror="this.src='https://via.placeholder.com/100x120'">
+
+            <div class="p-info">
+              <h2><%= player.name %></h2>
+              <p>
+                <% if (player.role.toLowerCase().includes('batter')) { %>
+                  🏏 <%= player.role %>
+                <% } else if (player.role.toLowerCase().includes('bowler')) { %>
+                  🎯 <%= player.role %>
+                <% } else if (player.role.toLowerCase().includes('all')) { %>
+                  💪 <%= player.role %>
+                <% } else { %>
+                  🧤 <%= player.role %>
+                <% } %>
+              </p>
+              <a href="/playerdetail/<%= player.id %>">
+                <button class="p-btn">View Detail</button>
+              </a>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Filter Script -->
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const players = document.querySelectorAll('.p-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active')); //reomove active class
+        button.classList.add('active');//add active class to clicked button
+
+        const category = button.getAttribute('data-category');
+
+        players.forEach(player => {
+          const roleText = player.querySelector('p').textContent.toLowerCase();
+
+          if (category === 'all' ||
+              (category === 'batter' && roleText.includes('batter')) ||
+              (category === 'bowler' && roleText.includes('bowler')) ||
+              (category === 'all-rounder' && roleText.includes('all-rounder')) ||
+              (category === 'wicket-keeper' && roleText.includes('wicket keeper'))) {
+            player.style.display = 'flex';
+          } else {
+            player.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

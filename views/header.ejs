@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+        <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Noorani Cricketers</a>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a href="/players">Players</a></li>
+                    <li><a href="/events">Events</a></li>
+                    <li><a href="/jersey">Jerseys</a></li>
+                    <li><a href="/links">Links</a></li>
+                    <li><a  href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/founder">Founder</a></li>
+                    <% if (isAdmin) { %>
+                    <li><a href="/admindash">Admin Dashboard</a></li>
+                    <li class="bcolor"><a href="/admin/logout">Logout</a></li>
+                    <% } else { %>
+                    <li class="bcolor"><a href="/login">Login</a></li>
+                    <% } %>
+
+
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" id="authButton" class="btn btn-login">Login</a>
+                <!-- <a href="signup.html" class="btn btn-signup">Sign Up</a> -->
+            </div>
+        </div>
+
+        <!-- for mobile -->
+        <div class="containermobile">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 100 80" fill="#e45305" xmlns="http://www.w3.org/2000/svg" class="menubarmobile"  id="menubarmobile">
+                    <rect width="80" height="10" rx="8"></rect>
+                    <rect y="30" width="80" height="10" rx="8"></rect>
+                    <rect y="60" width="80" height="10" rx="8"></rect>
+                </svg>               
+                <a href="/">Noorani Cricketers</a>
+            </div>
+        </div>
+            <div class="sidebar" id="sidebar">
+                    <a href="/" class="active">Home</a>
+                    <a href="/players">Players</a>
+                    <a href="/events">Events</a>
+                    <a href="/jersey">Jerseys</a>                    
+                    <a href="/links">Links</a>
+                    <a  href="/about">About</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/founder">Founder</a>
+                    <% if (isAdmin) { %>
+                    <li><a href="/admindash">Admin Dashboard</a></li>
+                    <li class="bcolor"><a href="/admin/logout">Logout</a></li>
+                    <% } else { %>
+                    <li class="bcolor"><a href="/login">Login</a></li>
+                    <% } %>
+            </div>
+
+        
+
+    </header>
+    <script src="js/script.js"></script>
+    
+</body>
+</html>

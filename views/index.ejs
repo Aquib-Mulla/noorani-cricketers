@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Noorani Cricketers</title>
+   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<style>
+  @media (max-width: 414px) {
+}
+
+</style>
+<body>
+  <%- include('header') %>
+    
+    <div class="slider">
+    <div class="slides">
+      <a href="#"><img src="img/logobanner.jpg" alt=""></a>
+      <a href="/events"><img src="img/Tournamates.jpg" alt=""></a>
+      <a href="/jersey"><img src="img/jersey.jpg" alt=""></a>
+      <a href="/links"><img src="img/cricketgroup.jpg" alt=""></a>
+    </div>
+
+    <button id="prev" class="btn">&#10094;</button>
+    <button id="next" class="btn">&#10095;</button>
+
+    <div class="dots"></div>
+  </div>
+
+  <script>
+    const slides = document.querySelector('.slides');
+    const images = document.querySelectorAll('.slides img');
+    const dotsContainer = document.querySelector('.dots');
+    let index = 0;
+
+    // Create dots dynamically
+    images.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => moveToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function moveToSlide(i) {
+      index = i;
+      slides.style.transform = `translateX(-${i * 100}vw)`;
+      updateDots();
+    }
+
+    function updateDots() {
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index].classList.add('active');
+    }
+
+    document.getElementById('prev').addEventListener('click', () => {
+      index = (index - 1 + images.length) % images.length;
+      moveToSlide(index);
+    });
+
+    document.getElementById('next').addEventListener('click', () => {
+      index = (index + 1) % images.length;
+      moveToSlide(index);
+    });
+
+    // Auto slide every 4 seconds
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      moveToSlide(index);
+    }, 6000);
+  </script>
+
+
+
+  <!--  -->
+    <section class="intro-section">
+        <div class="intro-content">
+            <h2>Noorani Cricketers</h2>
+            <p>
+            Noorani Cricketers is a passionate cricket community built to unite players,
+            celebrate teamwork, and encourage young talent to rise and shine in the
+            spirit of sportsmanship.
+            </p>
+            <a href="/about" class="intro-btn">Know More</a>
+        </div>
+    </section>
+  
+<!-- 🏏 Upcoming Events Section -->
+<section class="upcoming-events">
+  <h2 class="event-title">Upcoming Events</h2>
+
+  <div class="event-container">
+    <!-- Event 1 -->
+    <div class="event-card">
+      <img src="img/Events/3teamcup.jpeg" alt="Tournament Banner">
+    </div>
+    <!-- Event 1 -->
+    <div class="event-card">
+      <img src="img/Events/Ramadan event.jpeg" alt="Tournament Banner">
+    </div>
+
+</section>
+
+
+
+
+    <div class="playerbody">
+    <h1 class="p-title ">Players</h1>
+    <div class="p-container">
+
+        <!-- Player 1 -->
+        <div class="p-card">
+        <img src="img/shaibaz.jpg" alt="Player Photo" class="p-photo">
+        <div class="p-info">
+            <h2>Shaibaz Chiwne</h2>
+            <p>💪 All-Rounder</p>
+            <button class="p-btn">View Detail</button>
+        </div>
+        </div>
+
+        <!-- Player 2 -->
+        <div class="p-card">
+        <img src="img/faraz.jpg" alt="Player Photo" class="p-photo">
+        <div class="p-info">
+            <h2>Faraz Baudin</h2>
+            <p>💪 All-Rounder</p>
+            <button class="p-btn">View Detail</button>
+        </div>
+        </div>
+
+        <!-- Player 3 -->
+        <div class="p-card">
+        <img src="img/likman.jpg" alt="Player Photo" class="p-photo">
+        <div class="p-info">
+            <h2>Lukman Pansare</h2>
+            <p>🏏 Batter</p>
+            <button class="p-btn">View Detail</button>
+        </div>
+        </div>
+
+        <!-- Player 4 -->
+        <div class="p-card">
+        <img src="img/saad.jpg" alt="Player Photo" class="p-photo">
+        <div class="p-info">
+            <h2>Saad Mulla</h2>
+            <p>🏏 Batter</p>
+            <button class="p-btn">View Detail</button>
+        </div>
+        </div>
+
+        <!-- Player 5 -->
+        <div class="p-card">
+        <img src="img/rizwan.jpg" alt="Player Photo" class="p-photo">
+        <div class="p-info">
+            <h2>Rizwan Patel</h2>
+            <p>🏏 Batter</p>
+            <button class="p-btn">View Detail</button>
+        </div>
+        </div>
+        <div class="p-card pchide">
+        <img src="img/rehan2.jpg" alt="Player Photo" class="p-photo">
+        <div class="p-info">
+          <h2>Rehan Chiwne</h2>
+          <p>🏏 Batter</p>
+          <button class="p-btn">View Detail</button>
+        </div>
+        </div>
+
+    </div>
+    <div class="more-players">
+        <a href="/players" class="btn-more">More Players</a>
+    </div>
+    </div>
+    
+
+  <footer class="nc-footer">
+    Noorani Cricketers • All Rights Reserved.
+  </footer>
+
+    
+</body>
+</html>
