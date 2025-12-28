@@ -319,6 +319,9 @@ app.get("/admin/add-player", adminAuth, (req, res) => {
   res.render("addplayer", { player: null });
 });
 
+app.get("/health", (req, res) => {
+  res.send("Server is running");
+});
 
 /* ================= LOGIN PAGE ================= */
 app.get("/login", (req, res) => {
@@ -385,7 +388,8 @@ app.get("/admin/logout", (req, res) => {
 });
 
 /* ================= SERVER ================= */
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log("Server running on port", PORT);
 });
