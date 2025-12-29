@@ -34,5 +34,6 @@ const storageEvents = multer.diskStorage({
   }
 });
 
-const uploadEvents = multer({ storageEvents });
+
+const uploadEvents = multer({ storage: storageEvents });
 export default uploadEvents;
