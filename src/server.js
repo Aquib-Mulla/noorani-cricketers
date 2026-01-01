@@ -1,5 +1,5 @@
 import express from "express";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -11,7 +11,7 @@ import fs from "fs";
 
 
 /* ================= ENV ================= */
-dotenv.config();
+// dotenv.config();
 
 /* ================= FIX __dirname ================= */
 const __filename = fileURLToPath(import.meta.url);

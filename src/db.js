@@ -1,21 +1,25 @@
 import mysql from "mysql2";
 
-// ❌ DO NOT use dotenv in Railway production
-// ❌ DO NOT use DATABASE_URL
-
+// Create a connection pool
 const db = mysql.createPool({
-  host: process.env.DB_HOST,        // MYSQLHOST
-  user: process.env.DB_USER,        // MYSQLUSER
-  password: process.env.DB_PASSWORD,// MYSQLPASSWORD
-  database: process.env.DB_NAME,    // MYSQLDATABASE
+  host: process.env.DB_HOST,       // Railway MySQL host
+  user: process.env.DB_USER,       // Railway MySQL user
+  password: process.env.DB_PASSWORD, // Railway MySQL password
+  database: process.env.DB_NAME,   // Railway MySQL database
+  waitForConnections: true,
+  connectionLimit: 10,             // Max simultaneous connections
+  queueLimit: 0
 });
 
-db.getConnection((err) => {
+// Test the database connection
+db.getConnection((err, connection) => {
   if (err) {
     console.error("❌ MySQL Connection Failed:", err.message);
   } else {
     console.log("✅ MySQL Connected Successfully");
+    connection.release(); // Release connection back to pool
   }
 });
 
-export default db;
+// Export promise-based pool for async/await queries
+export default db.promise();
