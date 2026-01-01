@@ -1,23 +1,20 @@
 import mysql from "mysql2";
-import dotenv from "dotenv";
 
-dotenv.config();
+// ❌ DO NOT use dotenv in Railway production
+// ❌ DO NOT use DATABASE_URL
 
-// We use a Connection URI because cloud providers (like Aiven or TiDB) 
-// give you one single long string to connect.
-const db = mysql.createConnection(process.env.DATABASE_URL || {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT
+const db = mysql.createPool({
+  host: process.env.DB_HOST,        // MYSQLHOST
+  user: process.env.DB_USER,        // MYSQLUSER
+  password: process.env.DB_PASSWORD,// MYSQLPASSWORD
+  database: process.env.DB_NAME,    // MYSQLDATABASE
 });
 
-db.connect(err => {
+db.getConnection((err) => {
   if (err) {
-    console.error("❌ Database Connection Error:", err);
+    console.error("❌ MySQL Connection Failed:", err.message);
   } else {
-    console.log("✅ Database Connected");
+    console.log("✅ MySQL Connected Successfully");
   }
 });
 
