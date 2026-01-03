@@ -1,25 +1,24 @@
 import mysql from "mysql2";
+import dotenv from "dotenv";
 
-// Create a connection pool
-const db = mysql.createPool({
-  host: process.env.DB_HOST,       // Railway MySQL host
-  user: process.env.DB_USER,       // Railway MySQL user
-  password: process.env.DB_PASSWORD, // Railway MySQL password
-  database: process.env.DB_NAME,   // Railway MySQL database
-  waitForConnections: true,
-  connectionLimit: 10,             // Max simultaneous connections
-  queueLimit: 0
+dotenv.config();
+
+// We use a Connection URI because cloud providers (like Aiven or TiDB) 
+// give you one single long string to connect.
+const db = mysql.createConnection(process.env.DATABASE_URL || {
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
 });
 
-// Test the database connection
-db.getConnection((err, connection) => {
+db.connect(err => {
   if (err) {
-    console.error("❌ MySQL Connection Failed:", err.message);
+    console.error("❌ Database Connection Error:", err);
   } else {
-    console.log("✅ MySQL Connected Successfully");
-    connection.release(); // Release connection back to pool
+    console.log("✅ Database Connected");
   }
 });
 
-// Export promise-based pool for async/await queries
-export default db.promise();
+export default db;
