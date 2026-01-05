@@ -58,7 +58,7 @@ function adminAuth(req, res, next) {
 }
 
 /* ================= PUBLIC ROUTES ================= */
-app.get("/", (req, res) => res.render("index"));
+// app.get("/", (req, res) => res.render("index"));
 app.get("/about", (req, res) => res.render("about"));
 app.get("/contact", (req, res) => res.render("contact"));
 app.get("/events", (req, res) => res.render("events"));
@@ -72,6 +72,48 @@ app.get("/addplayer", adminAuth, (req, res) => {
   res.redirect("/admin/add-player");
 });
 
+app.get("/", (req, res) => {
+  const sql = "SELECT * FROM events ORDER BY event_date ASC";
+
+  db.query(sql, (err, events) => {
+    if (err) {
+      console.log(err);
+      return res.render("index", { events: [] });
+    }
+
+    res.render("index", { events });
+  });
+});
+// delete event route
+app.post("/admin/delete-event/:id", (req, res) => {
+  const eventId = req.params.id;
+
+  // get image path first
+  const getQuery = "SELECT event_image FROM events WHERE id = ?";
+
+  db.query(getQuery, [eventId], (err, result) => {
+    if (err || result.length === 0) {
+      return res.status(500).send("Event not found");
+    }
+
+    const imagePath = path.join(
+      process.cwd(),
+      "public/uploads",
+      result[0].event_image
+    );
+
+    // delete image file
+    fs.unlink(imagePath, () => {});
+
+    // delete event from DB
+    const deleteQuery = "DELETE FROM events WHERE id = ?";
+    db.query(deleteQuery, [eventId], (err) => {
+      if (err) return res.status(500).send("Delete failed");
+
+      res.send({ success: true });
+    });
+  });
+});
 
 /* ================= ADD EVENT ================= */
 app.post(
@@ -367,10 +409,39 @@ app.get("/admin/add-player", adminAuth, (req, res) => {
 });
 
 
-app.get("/admindash", adminAuth, (req, res) => {
-  res.render("admindash");
-});
+// app.get("/admindash", adminAuth, (req, res) => {
+//   res.render("admindash");
+// });
+app.get("/admindash", (req, res) => {
 
+  const playersQuery = "SELECT COUNT(*) AS totalPlayers FROM players";
+  const upcomingEventsQuery ="SELECT COUNT(*) AS upcomingEvents FROM events";
+
+  db.query(playersQuery, (err, playersResult) => {
+    if (err) {
+      console.log(err);
+      return res.render("admindash", {
+        totalPlayers: 0,
+        upcomingEvents: 0
+      });
+    }
+
+    db.query(upcomingEventsQuery, (err, eventsResult) => {
+      if (err) {
+        console.log(err);
+        return res.render("admindash", {
+          totalPlayers: playersResult[0].totalPlayers,
+          upcomingEvents: 0
+        });
+      }
+
+      res.render("admindash", {
+        totalPlayers: playersResult[0].totalPlayers,
+        upcomingEvents: eventsResult[0].upcomingEvents
+      });
+    });
+  });
+});
 /* ================= ADMIN ONLY PAGES ================= */
 
 app.get("/admin/add-event", adminAuth, (req, res) => {

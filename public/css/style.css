@@ -313,6 +313,10 @@ body{
     .p-btn:hover {
       background: #c74304;
     }
+    .p-btn a{
+      text-decoration: none;
+      color: white;
+    }
 }
 @media (max-width: 414px) {
   .playerbody {
@@ -400,6 +404,11 @@ body{
   .p-btn:hover {
     background: #c74304;
   }
+  .p-btn a{
+      text-decoration: none;
+      color: white;
+  }
+
 }
 
 /* for about */
@@ -1437,6 +1446,40 @@ body{
   .event-card:active {
     transform: scale(0.98);
   }
+.event-card {
+  position: relative;
+}
+
+.event-card img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Delete button container */
+.event-delete-form {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+/* Delete button style */
+.event-delete-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 0, 0, 0.85);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 28px;
+}
+
+.event-delete-btn:hover {
+  background: darkred;
+}
 
   .event-card img {
     width: 100%;
@@ -1619,6 +1662,40 @@ body{
   .event-card:active {
     transform: scale(0.98);
   }
+.event-card {
+  position: relative;
+}
+
+.event-card img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Delete button container */
+.event-delete-form {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+/* Delete button style */
+.event-delete-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 0, 0, 0.85);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 28px;
+}
+
+.event-delete-btn:hover {
+  background: darkred;
+}
 
   .event-card img {
     width: 100%;

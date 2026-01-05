@@ -95,15 +95,32 @@
   <h2 class="event-title">Upcoming Events</h2>
 
   <div class="event-container">
-    <!-- Event 1 -->
-    <div class="event-card">
-      <img src="img/Events/3teamcup.jpeg" alt="Tournament Banner">
-    </div>
-    <!-- Event 1 -->
-    <div class="event-card">
-      <img src="img/Events/Ramadan event.jpeg" alt="Tournament Banner">
-    </div>
+    <% if (events && events.length > 0) { %>
+      <% events.forEach(event => { %>
+      <div class="event-card">
+        <img
+          src="/uploads/<%= event.event_image %>"
+          alt="<%= event.event_name %>"
+        >
+        <% if (isAdmin) { %>
 
+          <!-- Top-left delete button -->
+          <form
+            action="/admin/delete-event/<%= event.id %>"
+            method="POST"
+            class="event-delete-form"
+            onsubmit="return confirm('Delete this event?');"
+          >
+            <button type="submit" class="event-delete-btn">✕</button>
+          </form>
+        <% } %>
+
+      </div>
+      <% }) %>
+    <% } else { %>
+      <p>No upcoming events</p>
+    <% } %>
+  </div>
 </section>
 
 
@@ -119,7 +136,7 @@
         <div class="p-info">
             <h2>Shaibaz Chiwne</h2>
             <p>💪 All-Rounder</p>
-            <button class="p-btn">View Detail</button>
+            <button class="p-btn"><a href=" /players">View Detail</a></button>
         </div>
         </div>
 
@@ -129,7 +146,7 @@
         <div class="p-info">
             <h2>Faraz Baudin</h2>
             <p>💪 All-Rounder</p>
-            <button class="p-btn">View Detail</button>
+            <button class="p-btn"><a href=" /players">View Detail</a></button>
         </div>
         </div>
 
@@ -139,7 +156,7 @@
         <div class="p-info">
             <h2>Lukman Pansare</h2>
             <p>🏏 Batter</p>
-            <button class="p-btn">View Detail</button>
+            <button class="p-btn"><a href=" /players">View Detail</a></button>
         </div>
         </div>
 
@@ -149,7 +166,7 @@
         <div class="p-info">
             <h2>Saad Mulla</h2>
             <p>🏏 Batter</p>
-            <button class="p-btn">View Detail</button>
+            <button class="p-btn"><a href=" /players">View Detail</a></button>
         </div>
         </div>
 
@@ -159,7 +176,7 @@
         <div class="p-info">
             <h2>Rizwan Patel</h2>
             <p>🏏 Batter</p>
-            <button class="p-btn">View Detail</button>
+            <button class="p-btn"><a href=" /players">View Detail</a></button>
         </div>
         </div>
         <div class="p-card pchide">
@@ -167,7 +184,7 @@
         <div class="p-info">
           <h2>Rehan Chiwne</h2>
           <p>🏏 Batter</p>
-          <button class="p-btn">View Detail</button>
+          <button class="p-btn"><a href=" /players">View Detail</a></button>
         </div>
         </div>
 
